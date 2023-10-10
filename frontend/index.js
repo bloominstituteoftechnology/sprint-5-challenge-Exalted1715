@@ -7,40 +7,64 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
 
 
 
-
 function createLearnerCards(fullName, email, mentors){
 
 
 
 //creating the containers & items
 let container = document.createElement('div')
-let fullName = document.createElement('h3')
+let learner = document.createElement('h3')
 let emailAddress = document.createElement('div')
 let mentorToggle = document.createElement('h4')
 let mentorTitle = document.createElement('ul')
-let listofMentors = docuement.createElement('li')
+let listofMentors = document.createElement('li')
 
 //adding classlists & Toggles
 container.classList.add('.card')
-mentorToggle.classList.add('h4')
+container.classList.add('.entry')
+mentorToggle.classList.add('.closed')
 
 //adding text
-fullName.textContent = `${data1.fullName}`
-emailAddress.textContent = `${data1.email}`
+learner.textContent = `${data.learners.fullName}`
+emailAddress.textContent = `${data.learners. email}`
 mentorTitle.textContent = '▶ Mentors'
-listofMentors.textContent = `${data1.mentors}`
+listofMentors.textContent = `${data.learners.mentors}`
 
 //appending
 document.querySelector('section').append(container)
-docuement.querySelector('div').appendChild(fullName)
-docuement.querySelector('div').appendChild(emailAddress)
-docuement.querySelector('div').appendChild(mentorToggle)
-docuement.querySelector('div').appendChild(mentorTitle)
-docuement.querySelector('div').appendChild(listofMentors)
+container.appendChild(fullName)
+container.appendChild(emailAddress)
+container.appendChild(mentorToggle)
+container.appendChild(mentorTitle)
+container.appendChild(listofMentors)
+console.log(container)
 
+//interaction 
+container.addEventListener('click', ()=> {
+  container.classList.toggle('selected')
+})
 
 return container
+
 }
+
+
+
+// API Fetch
+const res = axios.get('<http://localhost:3003/api/learners>')
+  .then(res => {
+   let {data} = res
+    let fullName = data.learners.fullName
+    let email = data.learners.email
+    let mentors = data.learners.mentors
+    const container = createLearnerCards(fullName, email, mentors)
+    entryPoint.appendChild(container)
+    console.log(res)
+  })
+  .catch(err =>{
+    console.error(err)
+  })
+  .finally(()=> console.log('its finally loaded'))
 
   // 👆 WORK WORK ABOVE THIS LINE 👆
 }
