@@ -7,63 +7,77 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
 
 
 
-function createLearnerCards(fullName, email, mentors){
+
 
 
 
 //creating the containers & items
 let container = document.createElement('div')
-let learner = document.createElement('h3')
+let learnerName = document.createElement('h3')
 let emailAddress = document.createElement('div')
 let mentorToggle = document.createElement('h4')
 let mentorTitle = document.createElement('ul')
 let listofMentors = document.createElement('li')
 
 //adding classlists & Toggles
-container.classList.add('.card')
-container.classList.add('.entry')
-mentorToggle.classList.add('.closed')
+container.classList.add('card')
+container.classList.add('entry')
+mentorToggle.classList.add('closed')
+
+
+
 
 //adding text
-learner.textContent = `${data.learners.fullName}`
-emailAddress.textContent = `${data.learners. email}`
-mentorTitle.textContent = '▶ Mentors'
-listofMentors.textContent = `${data.learners.mentors}`
+learnerName.textContent = `Mitchell B. Hammond`
+emailAddress.textContent = `dummyemail@gmail.com`
+mentorToggle.textContent = 'Mentors'
+listofMentors.textContent = `mentor 1`
 
 //appending
-document.querySelector('section').append(container)
-container.appendChild(fullName)
+document.querySelector('div').append(container)
+container.appendChild(learnerName)
 container.appendChild(emailAddress)
 container.appendChild(mentorToggle)
+mentorTitle.appendChild(listofMentors)
 container.appendChild(mentorTitle)
-container.appendChild(listofMentors)
-console.log(container)
+
+
 
 //interaction 
-container.addEventListener('click', ()=> {
+learnerName.addEventListener('click', ()=> {
+// make changes to learnerName.textContent = `${data}, ${id}`
   container.classList.toggle('selected')
 })
+emailAddress.addEventListener('click', ()=> {
+  // make changes to learnerName.textContent = `${data}, ${id}`
+    container.classList.toggle('selected')
+  })
 
-return container
 
-}
+mentorToggle.addEventListener('click', ()=> {
+  mentorToggle.classList.toggle('closed')
+  mentorToggle.classList.toggle('open')
+  container.classList.add('selected')
+})
+
+
+
 
 
 
 // API Fetch
 const res = axios.get('<http://localhost:3003/api/learners>')
   .then(res => {
-   let {data} = res
-    let fullName = data.learners.fullName
-    let email = data.learners.email
-    let mentors = data.learners.mentors
-    const container = createLearnerCards(fullName, email, mentors)
+
     entryPoint.appendChild(container)
+
     console.log(res)
   })
+
   .catch(err =>{
     console.error(err)
   })
+  
   .finally(()=> console.log('its finally loaded'))
 
   // 👆 WORK WORK ABOVE THIS LINE 👆
