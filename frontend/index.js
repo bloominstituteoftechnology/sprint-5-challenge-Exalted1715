@@ -61,24 +61,29 @@ mentorToggle.addEventListener('click', ()=> {
 })
 
 
-
+let endPointA = "http://localhost:3003/api/learners"
+let endPointB = "http://localhost:3003/api/mentors"
 
 
 
 // API Fetch
-const res = axios.get('<http://localhost:3003/api/learners>')
+axios.get(`${endPointA}`)
   .then(res => {
-
-    entryPoint.appendChild(container)
-
     console.log(res)
   })
-
-  .catch(err =>{
-    console.error(err)
+  .catch(error =>{
+    console.log(error)
   })
-  
-  .finally(()=> console.log('its finally loaded'))
+
+  axios.get(`${endPointB}`)
+  .then(res => {
+    console.log(res)
+  })
+  .catch(error =>{
+    console.log(error)
+  })
+
+
 
   // 👆 WORK WORK ABOVE THIS LINE 👆
 }
