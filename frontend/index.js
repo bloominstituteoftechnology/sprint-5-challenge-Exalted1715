@@ -123,18 +123,17 @@ learners.forEach(obj =>{
   // functionality for info <p>
   const pClass = document.querySelector('.info');
 
-// Function to update the "info" text
-document.addEventListener('click', evt => {
-  const h3Element = evt.target.querySelector('h3'); // Try to find an h3 element in the clicked container
+  // Function to update the "info" text
+ document.addEventListener('click', evt => {
+    if (evt.target === document.querySelector('h3') || evt.target === document.querySelector('div') || evt.target === document.querySelector('h4') ) {
+      const name = selectedCard.querySelector('h3').textContent;
+      pClass.textContent = `The selected learner is ${name}`;
+    } else {
+      pClass.textContent = 'No learner is selected';
+    }
+  })
+pClass.textContent = `No learner is selected`
 
-  if (h3Element) {
-    const name = h3Element.textContent;
-    pClass.textContent = `The selected learner is ${name}`;
-  } else {
-    pClass.textContent = 'No learner is selected';
-  }
-});
-pClass.textContent = 'No learner is selected';
   
   return container //learnerCard
   }
