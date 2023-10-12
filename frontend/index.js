@@ -45,16 +45,17 @@ learners.forEach(obj =>{
   
   //adding classlists & Toggles
   container.classList.add('card')
-  container.classList.add('entry')
+  
   mentorToggle.classList.add('closed')
-  mentorTitle.classList.add('ul')
+
   
   //adding text
   learnerName.textContent = `${obj.fullName}`
   emailAddress.textContent = `${obj.email}`
   mentorToggle.textContent = 'Mentors'
   // adding mentors in the li
-  mentorTitle.innerHTML = '';
+
+  
 
   // Set the mentor names in listofMentors with separate list items
   if (obj.mentors && obj.mentors.length > 0) {
@@ -81,14 +82,14 @@ learners.forEach(obj =>{
   container.appendChild(learnerName)
   container.appendChild(emailAddress)
   container.appendChild(mentorToggle)
-  mentorTitle.appendChild(listofMentors)
+
   container.appendChild(mentorTitle)
   
   //interaction 
   let originalLearnerName = ''; // ID'less section
   let selectedCard = null; // Track the currently selected card
   
-  learnerName.addEventListener('click', () => {
+  container.addEventListener('click', () => {
     // Remove the 'selected' class from all cards
     document.querySelectorAll('.card').forEach(card => {
       card.classList.remove('selected');
@@ -100,11 +101,14 @@ learners.forEach(obj =>{
       originalLearnerName = learnerName.textContent;
       learnerName.textContent = `${obj.fullName}, ID ${obj.id}`
       container.classList.add('selected')
+      learnerName.classList.add('selected')
     } else {
       // Deselect the current card
       selectedCard = null;
       learnerName.textContent = originalLearnerName
+      
       container.classList.remove('selected')
+      learnerName.classList.remove('selected')
     }
   });
   
