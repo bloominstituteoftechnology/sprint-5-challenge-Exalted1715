@@ -47,13 +47,28 @@ learners.forEach(obj =>{
   container.classList.add('card')
   container.classList.add('entry')
   mentorToggle.classList.add('closed')
-  
+  mentorTitle.classList.add('ul')
   
   //adding text
   learnerName.textContent = `${obj.fullName}`
   emailAddress.textContent = `${obj.email}`
   mentorToggle.textContent = 'Mentors'
-  listofMentors.textContent = `findMentorById()`
+  // adding mentors in the li
+  mentorTitle.innerHTML = '';
+
+  // Set the mentor names in listofMentors with separate list items
+  if (obj.mentors && obj.mentors.length > 0) {
+    obj.mentors.forEach(mentorId => {
+      const mentorName = findMentorById(mentorId);
+      const mentorItem = document.createElement('li');
+      mentorItem.textContent = mentorName;
+      mentorTitle.appendChild(mentorItem);
+    });
+  } else {
+    // Only add "No Mentors" if there are no mentors
+    listofMentors.textContent = 'No Mentors';
+  }
+
   
 //additional functionality with mentor id's
   function findMentorById(mentorId) {
@@ -70,15 +85,28 @@ learners.forEach(obj =>{
   container.appendChild(mentorTitle)
   
   //interaction 
-  learnerName.addEventListener('click', ()=> {
-  // make changes to learnerName.textContent = `${data}, ${id}`
-    container.classList.toggle('selected')
-  })
-  emailAddress.addEventListener('click', ()=> {
-    // make changes to learnerName.textContent = `${data}, ${id}`
-      container.classList.toggle('selected')
+  let originalLearnerName = ''; // ID'less section
+  let selectedCard = null; // Track the currently selected card
+  
+  learnerName.addEventListener('click', () => {
+    // Remove the 'selected' class from all cards
+    document.querySelectorAll('.card').forEach(card => {
+      card.classList.remove('selected');
     })
   
+    if (selectedCard !== container) {
+      // Set the selected card and update its content
+      selectedCard = container;
+      originalLearnerName = learnerName.textContent;
+      learnerName.textContent = `${obj.fullName}, ID ${obj.id}`
+      container.classList.add('selected')
+    } else {
+      // Deselect the current card
+      selectedCard = null;
+      learnerName.textContent = originalLearnerName
+      container.classList.remove('selected')
+    }
+  });
   
   mentorToggle.addEventListener('click', ()=> {
     mentorToggle.classList.toggle('closed')
