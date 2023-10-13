@@ -126,17 +126,16 @@ learners.forEach(obj =>{
   const pClass = document.querySelector('.info');
 
   // Function to update the "info" text
- pClass.addEventListener('click', evt => {
-    if (evt.target === container.querySelector('.card') ) {
-      const name = container.querySelector('h3').textContent;
-      pClass.textContent = `The selected learner is ${name}`;
-    } else {
-      pClass.textContent = 'No learner is selected';
+  document.addEventListener('click', evt => {
+    if (evt.target.closest('.card') === null) {
+        // Deselect the current card and update the "info" text
+        selectedCard = null;
+        pClass.textContent = 'No learner is selected';
     }
-  })
-pClass.textContent = `No learner is selected`
+});
 
-  
+pClass.textContent = `No learner is selected`;
+
   return container //learnerCard
   }
   
