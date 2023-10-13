@@ -92,7 +92,9 @@ learners.forEach(obj =>{
   container.addEventListener('click', () => {
     // Remove the 'selected' class from all cards
     document.querySelectorAll('.card').forEach(card => {
-      card.classList.remove('selected');
+      pClass.textContent = `The selected learner is ${obj.fullName}`
+      card.classList.remove('selected')
+      
     })
   
     if (selectedCard !== container) {
@@ -110,7 +112,7 @@ learners.forEach(obj =>{
       container.classList.remove('selected')
       learnerName.classList.remove('selected')
     }
-    container.classList.add('active')
+    
   });
   
   mentorToggle.addEventListener('click', ()=> {
@@ -124,9 +126,9 @@ learners.forEach(obj =>{
   const pClass = document.querySelector('.info');
 
   // Function to update the "info" text
- document.addEventListener('click', evt => {
-    if (evt.target === document.querySelector('h3') || evt.target === document.querySelector('div') || evt.target === document.querySelector('h4') ) {
-      const name = selectedCard.querySelector('h3').textContent;
+ pClass.addEventListener('click', evt => {
+    if (evt.target === container.querySelector('.card') ) {
+      const name = container.querySelector('h3').textContent;
       pClass.textContent = `The selected learner is ${name}`;
     } else {
       pClass.textContent = 'No learner is selected';
