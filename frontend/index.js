@@ -108,7 +108,7 @@ learners.forEach(obj =>{
       // Deselect the current card
       selectedCard = null;
       learnerName.textContent = originalLearnerName
-      
+      pClass.textContent = `No learner is selected`;
       container.classList.remove('selected')
       learnerName.classList.remove('selected')
     }
@@ -124,6 +124,7 @@ learners.forEach(obj =>{
 
   // functionality for info <p>
   const pClass = document.querySelector('.info');
+  
 
   // Function to update the "info" text
   document.addEventListener('click', evt => {
